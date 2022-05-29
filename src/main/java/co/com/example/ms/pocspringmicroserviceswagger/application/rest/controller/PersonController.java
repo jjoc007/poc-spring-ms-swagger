@@ -9,6 +9,7 @@ import co.com.example.ms.pocspringmicroserviceswagger.domain.model.PersonModel;
 import co.com.example.ms.pocspringmicroserviceswagger.domain.ports.PersonServicePort;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,8 @@ public class PersonController {
 		PersonModel personModel = PersonRestMapper.INSTANCE.mapToPersonModel(personRequest);
 		PersonResponse personResponse = PersonRestMapper.INSTANCE.mapToPersonResponse(
 			personServicePort.addPerson(personModel));
-		return ResponseEntity.ok(personResponse);
+		return ResponseEntity.status(HttpStatus.CREATED)
+			.body(personResponse);
 	}
 
 	@PutMapping

@@ -36,7 +36,9 @@ public class PersonServiceImpl implements PersonServicePort {
 
 	@Override
 	public PersonModel getPersonById(Long id) throws BusinessException {
-		Optional<PersonModel> personModelOptional = Optional.ofNullable(this.personPersistencePort.getPersonById(id));
+		Optional<PersonModel> personModelOptional = Optional.ofNullable(
+			this.personPersistencePort.getPersonById(id)
+		);
 		return personModelOptional.orElseThrow(PersonNotFoundException::new);
 	}
 }
